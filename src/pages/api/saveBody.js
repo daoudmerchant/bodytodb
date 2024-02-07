@@ -25,9 +25,7 @@ export default async function handler(request, response) {
     );
     response.status(200).json(results);
   } else if (request.method === "POST") {
-    const result = await collection.insertOne({
-      body: JSON.stringify(request.body),
-    });
+    const result = await collection.insertOne(request.body);
     response.status(201).json(result);
   } else {
     response.status(400).json();
