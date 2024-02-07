@@ -14,6 +14,15 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     const results = await collection.find({}).toArray();
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+    );
+    response.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
     response.status(200).json(results);
   } else if (request.method === "POST") {
     const result = await collection.insertOne({
