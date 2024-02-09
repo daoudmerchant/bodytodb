@@ -25,7 +25,10 @@ export default async function handler(request, response) {
     );
     response.status(200).json(results);
   } else if (request.method === "POST") {
-    const result = await collection.insertOne(request.body);
+    const result = await collection.insertOne({
+      ...request.body,
+      serverTimestamp: new Date().toISOString(),
+    });
     response.status(201).json(result);
   } else if (request.method === "DELETE") {
     const result = await collection.deleteMany({});
